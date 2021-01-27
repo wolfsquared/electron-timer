@@ -9,16 +9,45 @@
 </head>
 
 <body>
-    <h1>pomodoro time</h1>
+    <h1>Pomodoro Time</h1>
 
     <svg class="progress-ring" height="120" width="120">
         <circle class="progress-ring__circle" stroke="white" stroke-width="8" fill="transparent" r="44" cx="60"
             cy="60" />
     </svg>
+
+    <h1 id="current-time"> 00 : 00</h1>
+
     <script>
+        const curTime = document.getElementById('current-time')
+
         function setProgress(percent) {
             const offset = circumference - percent / 100 * circumference;
             circle.style.strokeDashoffset = offset;
+        }
+
+        function Timer(timeSecs, dispEl) {
+            const timeMilli = timeSecs * 1000
+            let currentTime = timeSecs
+
+            // setTimeout(() => {
+            //     dispEl.textContent = "00 : 00"
+            // }, timeMilli)
+            let timeInt= setInterval(() => {
+                currentTime -= 1;
+                let currentPerc= Math.round(currentTime/timeSecs*100);
+                console.log(currentPerc)
+                let dispTime= `${Math.round(currentTime/60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})} : ${Math.round(currentTime%60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`
+                if (currentTime > 0) {
+                    setProgress(currentPerc);
+                    dispEl.textContent = dispTime;
+                } else {
+                    setProgress(0)
+                    clearInterval(timeInt)
+                    dispEl.textContent = "00 : 00"
+                }
+            }, 1000)
+
         }
 
         const circle = document.querySelector('.progress-ring__circle');
