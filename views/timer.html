@@ -1,13 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <title>Mydoro</title>
 </head>
+
 <body>
     <h1>pomodoro time</h1>
-    
+
+    <svg class="progress-ring" height="120" width="120">
+        <circle class="progress-ring__circle" stroke="white" stroke-width="8" fill="transparent" r="44" cx="60"
+            cy="60" />
+    </svg>
+    <script>
+        function setProgress(percent) {
+            const offset = circumference - percent / 100 * circumference;
+            circle.style.strokeDashoffset = offset;
+        }
+
+        const circle = document.querySelector('.progress-ring__circle');
+        const radius = circle.r.baseVal.value;
+        const circumference = radius * 2 * Math.PI;
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+        circle.style.strokeDashoffset = circumference;
+    </script>
 </body>
+
 </html>
