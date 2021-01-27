@@ -17,10 +17,12 @@
     </svg>
 
     <h1 id="current-time"> 00 : 00</h1>
+    <audio src="./ring.wav" autostart="false" width="0" height="0" id="ring"
+enablejavascript="true">
 
     <script>
         const curTime = document.getElementById('current-time')
-
+        const sound = document.getElementById('ring')
         function setProgress(percent) {
             const offset = circumference - percent / 100 * circumference;
             circle.style.strokeDashoffset = offset;
@@ -30,9 +32,6 @@
             const timeMilli = timeSecs * 1000
             let currentTime = timeSecs
 
-            // setTimeout(() => {
-            //     dispEl.textContent = "00 : 00"
-            // }, timeMilli)
             let timeInt= setInterval(() => {
                 currentTime -= 1;
                 let currentPerc= Math.round(currentTime/timeSecs*100);
@@ -43,8 +42,9 @@
                     dispEl.textContent = dispTime;
                 } else {
                     setProgress(0)
-                    clearInterval(timeInt)
                     dispEl.textContent = "00 : 00"
+                    sound.play();
+                    clearInterval(timeInt)
                 }
             }, 1000)
 
