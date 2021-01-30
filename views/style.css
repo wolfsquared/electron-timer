@@ -18,3 +18,29 @@ body {
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
 }
+
+/* BUTTON AND INPUT */
+button{
+    padding: 5px;
+    background-color: rgb(56, 230, 40);
+    border: none;
+    border-radius: 2px;
+    margin-right: 5px;
+}
+
+input{
+    margin-top: 20px;
+    display: inline;
+    max-width: 50px;
+   padding: 5px;
+    border: solid 2px rgb(255, 255, 255);
+    background-color: rgb(56, 230, 40);
+    border-radius: 2px;
+}
+
+p{
+    display: inline;
+}
+.invisible {
+    display: none;
+}
