@@ -34,73 +34,8 @@
     <audio src="./ring.wav" autostart="false" width="0" height="0" id="ring" enablejavascript="true">
 
         <script>
-            // ring
-            const circle = document.querySelector('.progress-ring__circle');
-            const radius = circle.r.baseVal.value;
-            const circumference = radius * 2 * Math.PI;
-            circle.style.strokeDasharray = `${circumference} ${circumference}`;
-            circle.style.strokeDashoffset = circumference;
-            // setup
-            const curTime = document.getElementById('current-time')
-            const sound = document.getElementById('ring')
-            const startBtn = document.getElementById('start')
-            const cancelBtn = document.getElementById('cancel');
-            let running = false;
-            // import inputs
-            const hoursInput = document.getElementById('hours');
-            const minutesInput = document.getElementById('min');
-            const secondsInput = document.getElementById('sec');
-
-
-            function setProgress(percent) {
-                const offset = circumference - percent / 100 * circumference;
-                circle.style.strokeDashoffset = offset;
-            }
-
-            function Timer(timeSecs, dispEl) {
-                const timeMilli = timeSecs * 1000
-                let currentTime = timeSecs
-
-                let timeInt = setInterval(() => {
-                    currentTime -= 1;
-                    let currentPerc = Math.round(currentTime / timeSecs * 100);
-                    console.log(currentPerc)
-                    let dispTime = `${Math.floor(currentTime / 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false })} : ${Math.round(currentTime % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false })}`
-                    if (currentTime > 0) {
-                        setProgress(currentPerc);
-                        dispEl.textContent = dispTime;
-                    } else {
-                        setProgress(0)
-                        dispEl.textContent = "00 : 00"
-                        sound.play();
-                        clearInterval(timeInt)
-                        startBtn.textContent = "START"
-                        running= false
-                    }
-                }, 1000)
-
-            }
-
-            function startStopHandler() {
-                let timeToStart = 0;
-                if (!running) {
-
-                    timeToStart = (hoursInput.value * 60 * 60) + (minutesInput.value * 60) + (secondsInput.value)
-                    Timer(timeToStart, curTime)
-                    running = true;
-                    startBtn.textContent = "STOP"
-                }
-                if (running) {
-                    clearInterval(timeInt)
-                }
-
-
-
-            }
-
-            setProgress(100)
-            startBtn.addEventListener('click', startStopHandler)
-        </script>
+             require('./timer.js')
+             </script>
 </body>
 
 </html>
