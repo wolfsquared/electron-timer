@@ -12,6 +12,9 @@ const hoursInput = document.getElementById('hours');
 const minutesInput = document.getElementById('min');
 const secondsInput = document.getElementById('sec');
 
+function calculateTime(){
+
+}
 
 function setProgress(percent) {
     const circle = document.querySelector('.progress-ring__circle');
@@ -58,7 +61,8 @@ function startStopHandler() {
         startBtn.textContent = "STOP"
         }else{
             console.log(hoursInput.value, minutesInput.value, secondsInput.value)
-        timeToStart = (hoursInput.value * 60 * 60) + (minutesInput.value * 60) + (secondsInput.value)
+        timeToStart = (parseInt(hoursInput.value) * 120) + (parseInt(minutesInput.value) * 60) + (parseInt(secondsInput.value))
+        console.log(timeToStart)
         Timer(timeToStart, curTime)
         running = true;
         startBtn.textContent = "STOP"
